@@ -28,22 +28,28 @@ float cost(float guess) {
 }
 
 int main() {
-  srand(time(0));
-  float guess = rand_float() * 10.0f;
+  /* srand(time(0)); */
+  /* float guess = rand_float() * 10.0f; */
+  float guess = 2.5;
+  printf("guess: %f\n", guess);
 
-  float epsilon = 1e-3;
-  float rate = 1e-3;
-
-  printf("%f\n", cost(guess));
-
+  float epsilon = 0.001;
   for (size_t i = 0; 1; i++) {
     /* computes the cost_derivative using the finite difference method */
-    float cost_derivative = (cost(guess + epsilon) - cost(guess)) / epsilon;
-    guess -= rate * cost_derivative;
-    printf("%f\n", cost(guess));
+	float cost_w_epsilon = cost(guess + epsilon);
+	float cost_wo_epsilon = cost(guess);
+    float cost_derivative = cost_w_epsilon - cost_wo_epsilon;
+	printf("guess before: %f\n", guess);
+    guess -= cost_derivative;
+	printf("cost_w_epsilon: %f\n", cost_w_epsilon);
+	printf("cost_wo_epsilon: %f\n", cost_wo_epsilon);
+	printf("cost_derivative: %f\n", cost_derivative);
+	printf("guess after: %f\n", guess);
+	printf("--------------------\n");
 	if (cost(guess) <= 0.000003) {
 		break;
 	}
+	break;
   }
   printf("--------------------\n");
   printf("%f\n", guess);
