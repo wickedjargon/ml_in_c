@@ -25,7 +25,7 @@ float cost(float guess) {
 
 int main() {
     /* File to save the iteration data */
-    FILE *fp = fopen("gradient_descent.csv", "w");
+    FILE *fp = fopen("spreadsheet.csv", "w");
     if (fp == NULL) {
         perror("Unable to open file");
         return 1;
